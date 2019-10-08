@@ -1,5 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt
+from scipy import signal as sig
 
 baudRate=10
 
@@ -29,8 +30,15 @@ for i in range(len(bit_string)):
         sine_output=np.append(sine_output,wave2)
         square_output=np.append(square_output,square2)
 
+'''
 fig, axs = plt.subplots(2)
 fig.suptitle('FSK - F1:50Hz F2=200Hz')
 axs[0].plot(x, sine_output[0:len(x)])
 axs[1].plot(x, square_output[0:len(x)])
 plt.show()
+'''
+
+mls=sig.max_len_seq(6)
+header=np.append([1,1,1,1,0,0],mls[0])
+header=np.append(header,[0,0,1,1,1,1])
+
