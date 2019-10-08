@@ -6,8 +6,7 @@ Esta modulação normalmente é adotada em transmissões na banda de RF, no enta
 ![FSK Modulation](FSK.png)
 
 ## Sincronismo
-A mensagem a ser transimitida é assíncrona, ou seja, não há uma combinação prévia do horário em que ela será transmitida, então o detector desenvolvido deverá ser capaz de identificar corretamente o início e o fim de cada transmissão de dados. Para isso toda mensagem se iniciará com uma sequência pré-definida de bits. O cabeçaho não entra na conta da taxa de erro, então não é necessário que o decodificador o identifique totalmente, mas é fundamental que o momento da transição entre o cabeçalho e a mensagem seja definido com precisão. O cabeçalho utilizado será [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
-Essa sequência foi gerada utilizando um algoritmo chamado "*maximum length sequence*" e aumenta a resolução do pico de auto-correlação, facilitando a identificação do cabeçalho.
+A mensagem a ser transimitida é assíncrona, ou seja, não há uma combinação prévia do horário em que ela será transmitida, então o detector desenvolvido deverá ser capaz de identificar corretamente o início e o fim de cada transmissão de dados. Para isso toda mensagem se iniciará com uma sequência pré-definida de bits. O cabeçaho não entra na conta da taxa de erro, então não é necessário que o decodificador o identifique totalmente, mas é fundamental que o momento da transição entre o cabeçalho e a mensagem seja definido com precisão. O cabeçalho utilizado se encontra no arquivo *header.txt*. Essa sequência foi gerada utilizando um algoritmo chamado "*maximum length sequence*" e aumenta a resolução do pico de auto-correlação, facilitando a identificação do cabeçalho.
 
 ## Formato dos dados
 Os dados transmitidos podem ser de diferentes fontes (áudio, texto, imagem, etc), e de tamanhos variados. O detector deve ser capaz de receber os bits e fornecer **sem o cabeçalho** para a função *app_decoder* fornecida neste repositório (app_decoder.m ou app_decoder.py, a depender da linguagem escolhida). A função retorna a quantidade de bits perdidos no processo de detecção. É especialmente crítico que o momento to início da mensagem seja identificado corretamente, pois um erro de sincronismo levará ao erro de grande parte dos bits da mensagem e consequentemente ao fracasso da transmissão. 
@@ -26,7 +25,7 @@ Serão testadas duas modulações diferentes. Uma 2-FSK e uma 4-FSK. O detector 
     - 1000 Hz - 11
     - 1200 Hz - 10
 
-Não há restrições quanto à estratégia de detecção, apesar de ser recomendado o emprego de um filtro casado.
+Não há restrições quanto à estratégia de detecção, apesar de ser recomendado o emprego de um filtro casado. Para quem tiver curiosidade, as funções que fazem a transmissão se encontram no arquivo TX_script.py.
 
 ## Taxa de símbolos
 A taxa de síbolos utilizada será definida no momento da transmissão. O detector deverá fornecer a opção de definir a taxa ao início do processo de decodificação.
