@@ -48,8 +48,6 @@ casado_1=np.convolve(data,np.flip(wave1))
 casado_2=np.convolve(data,np.flip(wave2))
 
 #Amostragem do filtro casado a cada período de bit
-step=int(Fs/baudRate)
-
 amostra_casado1=casado_1[step::step]
 amostra_casado2=casado_2[step::step]
 t_amostra=np.arange(step/Fs,t[-1]+step/Fs,step/Fs)
@@ -72,8 +70,6 @@ casado_1=np.convolve(data,np.flip(wave1))
 casado_2=np.convolve(data,np.flip(wave2))
 
 #Amostragem do filtro casado a cada período de bit
-step=int(Fs/baudRate)
-
 amostra_casado1=casado_1[step::step]
 amostra_casado2=casado_2[step::step]
 t_amostra=np.arange(step/Fs,t[-1]+step/Fs,step/Fs)
@@ -87,19 +83,13 @@ axs[1].plot(t,casado_2[0:len(t)])
 axs[1].plot(t_amostra,amostra_casado2,'or')
 plt.show(block=False)
 
-#Filtro casado com erro de fase de 90°
-wave1=np.sin(2*np.pi*F1*t_wave+np.pi/2)
-wave2=np.sin(2*np.pi*F2*t_wave+np.pi/2)
-
-#Aplicação do filtro casado
+#Aplicação do filtro casado + média móvel
 casado_1=np.convolve(data,np.flip(wave1))
 casado_1=np.convolve(np.abs(casado_1),np.ones((int(len(t_wave)/2))))
 casado_2=np.convolve(data,np.flip(wave2))
 casado_2=np.convolve(np.abs(casado_2),np.ones((int(len(t_wave)/2))))
 
 #Amostragem do filtro casado a cada período de bit
-step=int(Fs/baudRate)
-
 amostra_casado1=casado_1[step::step]
 amostra_casado2=casado_2[step::step]
 t_amostra=np.arange(step/Fs,t[-1]+step/Fs,step/Fs)
