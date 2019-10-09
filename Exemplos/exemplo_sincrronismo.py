@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 mls=sig.max_len_seq(6)
 header=np.append([1,1,1,1,0,0],mls[0])
 header=np.append(header,[0,0,1,1,1,1])
+print(len(header))
 
 #Criação de uma sequência aleatória de 900 bits
 sequence=random.choices([0,1],k=900)
@@ -17,7 +18,7 @@ message=np.insert(sequence,position,header)
 print(position)
 
 #Calculo da correlação cruzada
-corr=np.correlate(message,header)
+corr=np.correlate(message,header,mode='valid')
 corr_position=np.argmax(corr)
 print(corr_position)
 
