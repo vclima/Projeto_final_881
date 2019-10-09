@@ -1,10 +1,12 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 from scipy import signal as sig
+import soundfile as sf
+
 
 baudRate=10
 
-Fs=16000
+Fs=44100
 F1=50
 F2=200
 t=np.arange(0,1/baudRate,1/Fs)
@@ -42,3 +44,4 @@ mls=sig.max_len_seq(6)
 header=np.append([1,1,1,1,0,0],mls[0])
 header=np.append(header,[0,0,1,1,1,1])
 
+sf.write('file.wav',sine_output,44100)

@@ -38,7 +38,7 @@ Para a apresentação, será necessário adquirir o sinal transmitido para fazer
 Como existe a possibilidde de fazer em diferentes linguagens, o procedimento para gravar áudio é diferente. Aqui vão algumas referências úteis para ajudar com este passo:
 - Importar um arquivo WAV:
     - https://www.mathworks.com/help/matlab/ref/audioread.html
-    - https://docs.python.org/3/library/wave.html
+    - https://pysoundfile.readthedocs.io/en/0.9.0/#module-soundfile
 - Gravar através do microfone do computador:
     - https://www.mathworks.com/help/matlab/import_export/record-and-play-audio.html
     - https://realpython.com/playing-and-recording-sound-python/
