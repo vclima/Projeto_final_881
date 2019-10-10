@@ -102,3 +102,7 @@ def bintoimg(bin_string):
     img=np.reshape(img,img_shape.astype(int))
     return img
 
+bitstr=texttobin('Ao longo de seus 50 anos de historia, a FEEC se consolidou como uma das unidades com maior qualidade de ensino e de pesquisa na Unicamp e no Brasil. A FEEC esta comprometida com a excelencia academica nas areas de ensino, pesquisa e extensao. Na graduacao, oferece o curso de Engenharia Eletrica nos periodos diurno (integral) e noturno e o curso de Engenharia de Computacao, este ministrado em conjunto com o Instituto de Computacao.')
+bits=np.append([0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],bitstr)
+print(list(bits.astype(int)))
+print(list(bitstr.astype(int)))
