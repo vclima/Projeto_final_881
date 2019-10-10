@@ -18,6 +18,13 @@ t_wave=np.arange(0,1/baudRate,1/Fs)
 wave1=np.sin(2*np.pi*F1*t_wave)
 wave2=np.sin(2*np.pi*F2*t_wave)
 
+#Apresentação das portadoras
+fig, axs = plt.subplots(2)
+fig.suptitle('Portadoras para bit 1 e 0')
+axs[0].plot(t_wave,wave1)
+axs[1].plot(t_wave,wave2)
+plt.show(block=False)
+
 #Aplicação do filtro casado
 casado_1=np.convolve(data,np.flip(wave1))
 casado_2=np.convolve(data,np.flip(wave2))
