@@ -1,7 +1,7 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 from scipy import signal as sig
-from scipy import misc
+import imageio
 import soundfile as sf
 
 def escreve_bits(bit_string):
@@ -70,12 +70,35 @@ def bintotext(bin_string):
     return string
 
 def imgtobin(file):
-    image= misc.imread('file.bmp', flatten= 0)
-    return
+    image=imageio.imread(file)
+    image=image[:,:,0]
+    shape=image.shape
+    image=np.reshape(image,(1,-1))
+    image=np.insert(image,0,shape)
+    bit_string=[]
+    for i in image:
+        bin_char=bin(i)
+        byte=bin_char[2:]
+        byte_size=len(byte)
+        while(byte_size<8):
+            byte='0'+byte
+            byte_size=len(byte)
+        for bit in byte:
+            bit_string=np.append(bit_string,bit)
+    return bit_string
 
+def bintoimg(bin_string):
+    while not len(bin_string)%8:
+        bin_string=np.append(bin_string,'0')
+    byte_string=[]
+    for i in range(int(len(bin_string)/8)):
+        byte='0b'
+        for j in range(8):
+            byte=byte+bin_string[8*i+j]
+        byte=int(byte,2)
+        byte_string=np.append(byte_string,byte)
+    img_shape=byte_string[0:2]
+    img=np.array(byte_string[2:])
+    img=np.reshape(img,img_shape.astype(int))
+    return img
 
-string='a b'
-bits=texttobin(string)
-print(bits)
-string=bintotext(bits)
-print(string)
