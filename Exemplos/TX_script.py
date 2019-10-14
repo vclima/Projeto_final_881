@@ -7,7 +7,7 @@ import soundfile as sf
 def escreve_bits2(bit_string,filename):
     baudRate=20
 
-    Fs=6000
+    Fs=24000
     F1=800
     F2=1200
     t=np.arange(0,1/baudRate,1/Fs)
@@ -26,17 +26,17 @@ def escreve_bits2(bit_string,filename):
     x=x[0:len(bit_string)*len(t)]
 
     for i in range(len(bit_string)):
-        if(bit_string[i]=='1'):
+        if(bit_string[i]=='0'):
             sine_output=np.append(sine_output,wave1)
         else:
             sine_output=np.append(sine_output,wave2)
             
-    sf.write(filename,sine_output,4000)
+    sf.write(filename,sine_output,Fs)
     
 def escreve_bits4(bit_string,filename):
     baudRate=20
 
-    Fs=6000
+    Fs=24000
     F1=600
     F2=8000
     F3=1000
@@ -71,7 +71,7 @@ def escreve_bits4(bit_string,filename):
         else:
             sine_output=np.append(sine_output,wave4)
             
-    sf.write(filename,sine_output,4000)
+    sf.write(filename,sine_output,Fs)
 
 '''
 fig, axs = plt.subplots(2)
