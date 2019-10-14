@@ -47,7 +47,8 @@ def app_decoder(bit_stream):
         size_byte=size_byte+str(j)
     length=int(size_byte,2)
     
-    recebido=bit_stream[31:31+length]
+    try: recebido=bit_stream[31:31+length]
+    except: recebido=bit_stream[31:]
     #Teste 1
     if(type_code==[0,0,0]):
         

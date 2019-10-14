@@ -145,7 +145,6 @@ def bintoimg(bin_string):
 def add_preamble(bit_string,msg):
 
     size=len(bit_string)
-    print(size)
     size=bin(size)[2:]
     bin_size=[]
 
@@ -171,9 +170,5 @@ def add_preamble(bit_string,msg):
 bitstr=texttobin('Uma noite destas, vindo da cidade para o Engenho Novo, encontrei num trem da Central um rapaz aqui do bairro, que eu conheco de vista e de chapeu.')
 bits=add_preamble(bitstr,0)
 print(list(bits.astype(int)))
-print(list(bitstr.astype(int)))
-escreve_bits2(bits,'file.wav')
-escreve_bits4(bits,'file4.wav')
-a=imgtobin('file.bmp')
-print(len(a))
-print(bin(len(a))[2:])
+escreve_bits2(bits,'teste_2fsk.wav')
+escreve_bits4(bits,'teste_4fsk.wav')
