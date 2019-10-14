@@ -4,12 +4,12 @@ from scipy import signal as sig
 import imageio
 import soundfile as sf
 
-def escreve_bits(bit_string):
-    baudRate=10
+def escreve_bits2(bit_string,filename):
+    baudRate=20
 
-    Fs=44100
-    F1=50
-    F2=200
+    Fs=6000
+    F1=800
+    F2=1200
     t=np.arange(0,1/baudRate,1/Fs)
 
     mls=sig.max_len_seq(6)
@@ -31,7 +31,47 @@ def escreve_bits(bit_string):
         else:
             sine_output=np.append(sine_output,wave2)
             
-    sf.write('file.wav',sine_output,44100)
+    sf.write(filename,sine_output,4000)
+    
+def escreve_bits4(bit_string,filename):
+    baudRate=20
+
+    Fs=6000
+    F1=600
+    F2=8000
+    F3=1000
+    F4=1200
+    t=np.arange(0,1/baudRate,1/Fs)
+
+    mls=sig.max_len_seq(6)
+    header=np.append([1,1,1,1,0,0],mls[0])
+    header=np.append(header,[0,0,1,1,1,1])
+
+    bit_string=np.append(header,bit_string)
+
+    wave1=np.sin(2*np.pi*F1*t)
+    wave2=np.sin(2*np.pi*F2*t)
+    wave3=np.sin(2*np.pi*F3*t)
+    wave4=np.sin(2*np.pi*F4*t)
+    sine_output=np.array([0])
+
+    x=np.arange(0,(len(bit_string)/baudRate)+1,1/Fs)
+    x=x[0:len(bit_string)*len(t)]
+
+    if(not(len(bit_string)%2)):
+        bit_string=np.append(bit_string,'0')
+
+    for i in range(int(len(bit_string)/2)):
+        if(bit_string[2*i]=='0' and bit_string[2*i+1]=='0'):
+            sine_output=np.append(sine_output,wave1)
+        elif(bit_string[2*i]=='0' and bit_string[2*i+1]=='1'):
+            sine_output=np.append(sine_output,wave2)
+        elif(bit_string[2*i]=='1' and bit_string[2*i+1]=='1'):
+            sine_output=np.append(sine_output,wave3)
+        else:
+            sine_output=np.append(sine_output,wave4)
+            
+    sf.write(filename,sine_output,4000)
 
 '''
 fig, axs = plt.subplots(2)
@@ -102,7 +142,38 @@ def bintoimg(bin_string):
     img=np.reshape(img,img_shape.astype(int))
     return img
 
-bitstr=texttobin('Ao longo de seus 50 anos de historia, a FEEC se consolidou como uma das unidades com maior qualidade de ensino e de pesquisa na Unicamp e no Brasil. A FEEC esta comprometida com a excelencia academica nas areas de ensino, pesquisa e extensao. Na graduacao, oferece o curso de Engenharia Eletrica nos periodos diurno (integral) e noturno e o curso de Engenharia de Computacao, este ministrado em conjunto com o Instituto de Computacao.')
-bits=np.append([0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],bitstr)
+def add_preamble(bit_string,msg):
+
+    size=len(bit_string)
+    print(size)
+    size=bin(size)[2:]
+    bin_size=[]
+
+    for i in size:
+        bin_size=np.append(bin_size,i)
+
+    while(len(bin_size)<16):
+        bin_size=np.append(0,bin_size)
+
+    bit_string=np.append(bin_size,bit_string)
+
+    if(msg==0):
+        bits=np.append([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],bit_string)
+    elif(msg==1):
+        bits=np.append([0,0,0,0,0,0,0,0,0,0,1,1,1,1,1],bit_string)
+    elif(msg==2):
+        bits=np.append([0,0,0,0,0,1,1,1,1,1,0,0,0,0,0],bit_string) 
+    elif(msg==3):
+        bits=np.append([0,0,0,0,0,1,1,1,1,1,1,1,1,1,1],bit_string)  
+
+    return bits
+
+bitstr=texttobin('Uma noite destas, vindo da cidade para o Engenho Novo, encontrei num trem da Central um rapaz aqui do bairro, que eu conheco de vista e de chapeu.')
+bits=add_preamble(bitstr,0)
 print(list(bits.astype(int)))
 print(list(bitstr.astype(int)))
+escreve_bits2(bits,'file.wav')
+escreve_bits4(bits,'file4.wav')
+a=imgtobin('file.bmp')
+print(len(a))
+print(bin(len(a))[2:])

@@ -6,13 +6,13 @@ data, samplerate = sf.read('file.wav')
 t=np.arange(0,len(data)/samplerate,1/samplerate)
 plt.plot(t,data)
 plt.title('Sinal recebido')
-plt.show(block=False)
+plt.show()
 
-baudRate=10
+baudRate=50
 
-Fs=44100
-F1=50
-F2=200
+Fs=4000
+F1=800
+F2=1200
 t_wave=np.arange(0,1/baudRate,1/Fs)
 
 wave1=np.sin(2*np.pi*F1*t_wave)
