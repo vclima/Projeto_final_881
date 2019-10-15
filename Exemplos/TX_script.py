@@ -38,7 +38,7 @@ def escreve_bits4(bit_string,filename):
 
     Fs=24000
     F1=600
-    F2=8000
+    F2=800
     F3=1000
     F4=1200
     t=np.arange(0,1/baudRate,1/Fs)
