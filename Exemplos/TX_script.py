@@ -18,8 +18,8 @@ def escreve_bits2(bit_string,filename):
 
     bit_string=np.append(header,bit_string)
 
-    wave1=np.sin(2*np.pi*F1*t)
-    wave2=np.sin(2*np.pi*F2*t)
+    wave1=np.cos(2*np.pi*F1*t)
+    wave2=np.cos(2*np.pi*F2*t)
     sine_output=np.array([0])
 
     x=np.arange(0,(len(bit_string)/baudRate)+1,1/Fs)
@@ -49,10 +49,10 @@ def escreve_bits4(bit_string,filename):
 
     bit_string=np.append(header,bit_string)
 
-    wave1=np.sin(2*np.pi*F1*t)
-    wave2=np.sin(2*np.pi*F2*t)
-    wave3=np.sin(2*np.pi*F3*t)
-    wave4=np.sin(2*np.pi*F4*t)
+    wave1=np.cos(2*np.pi*F1*t)
+    wave2=np.cos(2*np.pi*F2*t)
+    wave3=np.cos(2*np.pi*F3*t)
+    wave4=np.cos(2*np.pi*F4*t)
     sine_output=np.array([0])
 
     x=np.arange(0,(len(bit_string)/baudRate)+1,1/Fs)

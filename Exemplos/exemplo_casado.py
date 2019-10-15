@@ -26,8 +26,8 @@ F1=800
 F2=1200
 t_wave=np.arange(0,1/baudRate,1/Fs)
 
-wave1=np.sin(2*np.pi*F1*t_wave)
-wave2=np.sin(2*np.pi*F2*t_wave)
+wave1=np.cos(2*np.pi*F1*t_wave)
+wave2=np.cos(2*np.pi*F2*t_wave)
 
 #Apresentação das portadoras 2 FSK
 fig, axs = plt.subplots(2,1,constrained_layout=True)
@@ -63,10 +63,10 @@ F4=1200
 
 t_wave=np.arange(0,1/baudRate,1/Fs)
 
-wave1=np.sin(2*np.pi*F1*t_wave)
-wave2=np.sin(2*np.pi*F2*t_wave)
-wave3=np.sin(2*np.pi*F3*t_wave)
-wave4=np.sin(2*np.pi*F4*t_wave)
+wave1=np.cos(2*np.pi*F1*t_wave)
+wave2=np.cos(2*np.pi*F2*t_wave)
+wave3=np.cos(2*np.pi*F3*t_wave)
+wave4=np.cos(2*np.pi*F4*t_wave)
 
 #Apresentação das portadoras
 fig, axs = plt.subplots(2,2,constrained_layout=True)
@@ -86,8 +86,8 @@ F1=800
 F2=1200
 t_wave=np.arange(0,1/baudRate,1/Fs)
 
-wave1=np.sin(2*np.pi*F1*t_wave)
-wave2=np.sin(2*np.pi*F2*t_wave)
+wave1=np.cos(2*np.pi*F1*t_wave)
+wave2=np.cos(2*np.pi*F2*t_wave)
 
 #Aplicação do filtro casado
 casado_1=np.convolve(data,np.flip(wave1))
@@ -111,8 +111,8 @@ plt.show()
 
 
 #Filtro casado com erro de fase de 45°
-wave1=np.sin(2*np.pi*F1*t_wave+np.pi/4)
-wave2=np.sin(2*np.pi*F2*t_wave+np.pi/4)
+wave1=np.cos(2*np.pi*F1*t_wave+np.pi/4)
+wave2=np.cos(2*np.pi*F2*t_wave+np.pi/4)
 
 #Aplicação do filtro casado
 casado_1=np.convolve(data,np.flip(wave1))
@@ -133,8 +133,8 @@ axs[1].plot(t_amostra,amostra_casado2,'or')
 plt.show()
 
 #Filtro casado com erro de fase de 90°
-wave1=np.sin(2*np.pi*F1*t_wave+np.pi/2)
-wave2=np.sin(2*np.pi*F2*t_wave+np.pi/2)
+wave1=np.cos(2*np.pi*F1*t_wave+np.pi/2)
+wave2=np.cos(2*np.pi*F2*t_wave+np.pi/2)
 
 #Aplicação do filtro casado
 casado_1=np.convolve(data,np.flip(wave1))
